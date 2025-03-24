@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import TanstakProvider from "@/context/tanstak-provider";
 import { Toaster } from "sonner";
-import Nave from "./components/nave-bar";
+ 
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,9 +32,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* <CookieProvider> */}
-        <Nave/>
-          <Toaster />
-          <TanstakProvider>{children}</TanstakProvider>
+        <Toaster />
+        <TanstakProvider>
+
+          {children}
+        </TanstakProvider>
         {/* </CookieProvider> */}
       </body>
     </html>

@@ -61,7 +61,7 @@ export default function Login() {
       Cookies.set("tokens", response.token); 
       localStorage.setItem("token", response.token);
       setTimeout(() => router.push("/"), 2000);
-      console.log(response);
+     
      
     } catch (error) {
       const customError = error as CustomError;
