@@ -22,7 +22,6 @@ import { useRouter } from "next/navigation";
 // import { CustomError } from "@/types/user";
 import { PasswordField } from "@/components/ui/password-field";
 import { Spinner } from "@/components/ui/spinner";
-import { CustomError } from "@/types/User";
 import Cookies from "js-cookie";
 
 // Define your form schema with validation
@@ -63,9 +62,9 @@ export default function Login() {
       setTimeout(() => router.push("/"), 2000);
      
      
-    } catch (error) {
-      const customError = error as CustomError;
-      toast.error(customError.response?.data?.message || "Login failed.");
+    } catch (error:any) {
+      // const customError = error as CustomError;
+      toast.error(error.response?.data?.error);
     }
   }
 

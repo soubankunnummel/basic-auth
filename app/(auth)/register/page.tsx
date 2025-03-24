@@ -19,7 +19,6 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Spinner } from "@/components/ui/spinner";
-import { CustomError } from "@/types/User";
 
 const formSchema = z
   .object({
@@ -77,9 +76,8 @@ export default function Register() {
           console.log(response);
           toast.success("Register Success");
           setTimeout(() => router.push("/login"), 2000);
-        } catch (error) {
-          const customError = error as CustomError;
-          toast.error(customError.response?.data?.message || "Registration failed.");
+        } catch (error:any) {
+          toast.error(error.response?.data?.error || "Registration failed.");
         }
       } 
   return (
