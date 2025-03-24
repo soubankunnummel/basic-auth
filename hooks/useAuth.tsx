@@ -17,3 +17,10 @@ export const useAdminLogin = (): UseMutationResult<AuthResponse, Error, User> =>
     });
   };
  
+
+export const useLogout = (): any => {
+    return useMutation({
+      mutationKey: ["logout"],
+      mutationFn: authService.logout,
+    });
+  }

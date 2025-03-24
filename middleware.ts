@@ -4,14 +4,22 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("token");
 
-  // If the user is not authenticated and tries to access a protected route, redirect to login
+  // If the user is not authenticated
   if (!token) {
-    if (request.nextUrl.pathname !== "/login") {
+    // Allow access to home, login, and register pages
+    if (
+      request.nextUrl.pathname !== "/" &&
+      request.nextUrl.pathname !== "/login" &&
+      request.nextUrl.pathname !== "/register"
+    ) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
   } else {
-    // If the user is authenticated and tries to access the login page, redirect to the dashboard
-    if (request.nextUrl.pathname === "/login") {
+    // If the user is authenticated, redirect from login and register pages to home
+    if (
+      request.nextUrl.pathname === "/login" ||
+      request.nextUrl.pathname === "/register"
+    ) {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
@@ -27,8 +35,7 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
-     * - login (login page)
      */
-    // "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
   ],
 };

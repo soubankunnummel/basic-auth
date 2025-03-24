@@ -1,9 +1,11 @@
 "use client";
+import { useLogout } from "@/hooks/useAuth";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 export default function Nave() {
   const [token, setToken] = useState<string | null>(null);
+  const logout = useLogout()
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -12,6 +14,7 @@ export default function Nave() {
   }, []);
 
   const handleLogout = () => {
+    logout.mutateAsync();
     localStorage.removeItem("token");
     setToken(null);
     window.location.href = "/";
